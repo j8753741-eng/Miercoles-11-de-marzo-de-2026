@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Una carta para ti</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+<title>MIÉRCOLES 11 DE MARZO 2026</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 
@@ -17,13 +18,13 @@ color:white;
 overflow-x:hidden;
 }
 
-/* cielo estrellas */
+/* estrellas */
 
 .stars{
 position:fixed;
 width:100%;
 height:100%;
-z-index:-2;
+z-index:-3;
 }
 
 .star{
@@ -40,29 +41,33 @@ from{opacity:0.2}
 to{opacity:1}
 }
 
-/* título metálico */
+/* titulo legible metálico */
 
 .title{
 margin-top:70px;
 text-align:center;
-font-size:60px;
-font-family:'Great Vibes',cursive;
-background:linear-gradient(45deg,#e6b3ff,#b84dff,#ff99ff);
+font-size:44px;
+font-family:'Playfair Display',serif;
+letter-spacing:1px;
+
+background:linear-gradient(45deg,#f0c8ff,#b84dff,#ff9fff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
+
 text-shadow:
-0 0 10px #b84dff,
-0 0 25px #b84dff,
-0 0 50px #ff66ff;
+0 0 8px #b84dff,
+0 0 18px #b84dff,
+0 0 35px #ff66ff;
+
 animation:glow 4s infinite alternate;
 }
 
 @keyframes glow{
 from{text-shadow:0 0 10px #b84dff}
-to{text-shadow:0 0 40px #ff66ff}
+to{text-shadow:0 0 35px #ff66ff}
 }
 
-/* botón */
+/* boton */
 
 .open-btn{
 display:block;
@@ -90,7 +95,6 @@ width:300px;
 height:200px;
 margin:60px auto;
 position:relative;
-cursor:pointer;
 }
 
 .envelope-body{
@@ -116,16 +120,40 @@ clip-path:polygon(0 0,100% 0,50% 60%);
 transform:rotateX(180deg);
 }
 
+/* constelaciones */
+
+.constellation{
+position:fixed;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+.cstar{
+position:absolute;
+width:4px;
+height:4px;
+background:#fff;
+border-radius:50%;
+box-shadow:0 0 10px #fff;
+animation:constGlow 3s infinite alternate;
+}
+
+@keyframes constGlow{
+from{opacity:0.4}
+to{opacity:1}
+}
+
 /* carta */
 
 .letter{
 max-width:800px;
 margin:auto;
 padding:40px;
-background:rgba(255,255,255,0.06);
+background:rgba(255,255,255,0.07);
 border-radius:15px;
 backdrop-filter:blur(8px);
-box-shadow:0 0 40px rgba(255,0,200,0.3);
+box-shadow:0 0 40px rgba(255,0,200,0.25);
 display:none;
 }
 
@@ -144,6 +172,30 @@ font-size:20px;
 text-align:center;
 color:#ffd9ff;
 text-shadow:0 0 15px #ff66ff;
+}
+
+/* firma animada */
+
+.signature{
+margin-top:50px;
+font-family:'Great Vibes',cursive;
+font-size:36px;
+text-align:right;
+
+border-right:3px solid #fff;
+width:0;
+white-space:nowrap;
+overflow:hidden;
+
+animation:write 4s steps(30) forwards, blink 1s infinite;
+}
+
+@keyframes write{
+to{width:250px}
+}
+
+@keyframes blink{
+50%{border-color:transparent}
 }
 
 /* rosas */
@@ -167,6 +219,7 @@ transform:translateY(110vh) rotate(360deg);
 <body>
 
 <div class="stars" id="stars"></div>
+<div class="constellation" id="constellation"></div>
 
 <h1 class="title">Una carta para ti preciosa, VALERIA PETRO VILLAZÓN ✨</h1>
 
@@ -179,6 +232,7 @@ transform:translateY(110vh) rotate(360deg);
 
 <div class="letter" id="letter">
 
+<p class="line">Esta noche, miércoles 11 de marzo de 2026, mientras el silencio de la noche vuelve a envolverlo todo y las estrellas empiezan a iluminar el cielo, no puedo evitar pensar en ti...</p>
 <p class="line">
 Esta noche, miércoles 11 de marzo de 2026, mientras el silencio de la noche vuelve a envolverlo todo y las estrellas empiezan a iluminar el cielo, no puedo evitar pensar en ti. Hace apenas un rato nos vimos, pude mirarte a los ojos, escucharte, sentir tu presencia tan cerca… y aun así, ahora que ya no estás conmigo, siento que me haces falta otra vez. Es extraño y hermoso al mismo tiempo cómo alguien puede irse por unas horas y aun así dejar un vacío tan grande.
 </p>
@@ -229,6 +283,10 @@ Para ti, que llegaste a mi vida de una forma tan inesperada y aun así lograste 
 Si alguna vez dudas de lo importante que eres para mí, recuerda algo: incluso cuando el día termina, cuando todo se queda en silencio y cuando las estrellas aparecen en el cielo… mi pensamiento siempre encuentra el camino de regreso hacia ti, porque en mi corazón hay un lugar que solo te pertenece a ti.
 </div>
 
+<div class="signature">
+Con todo mi amor para ti VALERIA PETRO VILLAZÓN, <P><STRONG>JUAN KALETH MENDOZA PRIMERA 💜</STRONG></P>
+</div>
+
 </div>
 
 <script>
@@ -237,7 +295,7 @@ Si alguna vez dudas de lo importante que eres para mí, recuerda algo: incluso c
 
 const stars=document.getElementById("stars");
 
-for(let i=0;i<150;i++){
+for(let i=0;i<120;i++){
 let star=document.createElement("div");
 star.className="star";
 star.style.top=Math.random()*100+"%";
@@ -260,6 +318,22 @@ setTimeout(()=>{rose.remove()},10000);
 
 setInterval(createRose,800);
 
+/* constelaciones */
+
+function createConstellation(){
+
+const container=document.getElementById("constellation");
+
+for(let i=0;i<20;i++){
+let s=document.createElement("div");
+s.className="cstar";
+s.style.top=Math.random()*100+"%";
+s.style.left=Math.random()*100+"%";
+container.appendChild(s);
+}
+
+}
+
 /* abrir sobre */
 
 function openEnvelope(){
@@ -269,6 +343,8 @@ const letter=document.getElementById("letter");
 
 envelope.classList.add("open");
 
+createConstellation();
+
 setTimeout(()=>{
 letter.style.display="block";
 showLines();
@@ -276,16 +352,17 @@ showLines();
 
 }
 
-/* mostrar texto línea por línea */
+/* texto linea por linea */
 
 function showLines(){
+
 const lines=document.querySelectorAll(".line");
 
 lines.forEach((line,i)=>{
 setTimeout(()=>{
 line.style.opacity=1;
 line.style.transform="translateY(0)";
-},i*1200);
+},i*1300);
 });
 
 }
@@ -293,4 +370,4 @@ line.style.transform="translateY(0)";
 </script>
 
 </body>
-</html>
+  </html>
